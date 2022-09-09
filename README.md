@@ -4,7 +4,7 @@
 
 # 9조 클론코딩
 
-**클론 대상 사이트** : 마켓컬리
+**클론 대상 사이트** : 마켓컬리 (https://www.kurly.com/main?gclid=Cj0KCQiA09eQBhCxARIsAAYRiymFTo_B-h_Ud0gO_bvKSG36IaBralIpgBFdb2WKsfT25LH5s8RrK-4aAm26EALw_wcB&utm_campaign=home_hashtag&utm_medium=2202&utm_source=1055&utm_term=#%EB%A7%88%EC%BC%93%EC%BB%AC%EB%A6%AC&utm_content=brand)
 
 📸  **클론 페이지** : 로그인, 회원가입, 메인, 장바구니
 
