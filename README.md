@@ -20,17 +20,21 @@
 
 👨‍👦 **Front-End** : 강민택, 이예지
 ## ⚔️ 기술 스택
-**Back-End**
+
 ## API 명세서
-[Notion]()
+
 ## 📜  페이지 설명
+
 ### 📎  로그인 페이지
+
 ### 📎  회원가입 페이지
+
 ### 📎  메인(신상품), 베스트, 알뜰쇼핑 페이지
+
 ### 📎  장바구니 페이지
+
 ## ⛳️  역할 담당
 
-  
 # 💡Trouble Shooting
 
 <h3 align="center"><b>📂 Project Directory Structure 📁</b></h3>
