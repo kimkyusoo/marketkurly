@@ -34,7 +34,7 @@ public class Comment extends Timestamped{
     private String comment;
 
     @Column(nullable = false)
-    private String nickname;
+    private String username;
 
     @Column
     private String imageUrl;
@@ -43,9 +43,9 @@ public class Comment extends Timestamped{
     private String filename;
 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,13 +54,13 @@ public class Comment extends Timestamped{
 
 
 
-    public Comment(CommentRequestDto commentRequestDto, Product product) {
+    public Comment(CommentRequestDto commentRequestDto, Product product, User user) {
         this.title = commentRequestDto.getTitle();
         this.comment = commentRequestDto.getComment();
         this.imageUrl = commentRequestDto.getImageUrl();
-        this.nickname = commentRequestDto.getNickname();
+        this.username = commentRequestDto.getUsername();
         this.filename = commentRequestDto.getFilename();
-//        this.user = user;
+        this.user = user;
         this.product = product;
     }
 

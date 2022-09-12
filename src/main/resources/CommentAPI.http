@@ -14,7 +14,7 @@ Content-Type: application/json
 {
 "title": "제목1",
 "comment": "코멘트1",
-"nickname": "닉네임1"
+"username": "닉네임1"
 }
 --abcd
 Content-Disposition: form-data; name="imageUrl"; filename="2.JPG"
@@ -33,7 +33,7 @@ Content-Type: application/json
 {
 "title": "제목2",
 "comment": "코멘트2",
-"nickname": "닉네임1"
+"username": "닉네임1"
 }
 --abcd
 Content-Disposition: form-data; name="imageUrl"; filename=""
@@ -51,7 +51,7 @@ Content-Type: application/json
 {
 "title": "제목수정1",
 "comment": "코멘트수정1",
-"nickname": "닉네임1"
+"username": "닉네임1"
 }
 --abcd
 Content-Disposition: form-data; name="imageUrl"; filename="3.JPG"
@@ -71,7 +71,7 @@ Content-Type: application/json
 {
 "title": "제목수정1212",
 "comment": "코멘트수정1212",
-"nickname": "닉네임1"
+"username": "닉네임1"
 }
 --abcd
 Content-Disposition: form-data; name="imageUrl"; filename=""
@@ -79,5 +79,5 @@ Content-Type: multipart/form-data
 
 
 ### Delete Comment
-DELETE http://localhost:8080/api/comment/1
+DELETE http://localhost:8080/api/comment/2
 Content-Type: application/json

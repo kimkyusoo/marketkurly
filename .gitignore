@@ -39,12 +39,10 @@ out/
 ### Aws S3 bucket ###
 awsS3.yml
 
+### setting ###
+application.properties
+
 ### Test ###
-resources/2.JPG
-resources/3.JPG
-resources/CommentAPI.http
-resources/data.sql
-model/Product.java
-model/User.java
-ProductRepository.java
-UserRepository.java
+resources/*.JPG
+resources/*.http
+resources/*.sql

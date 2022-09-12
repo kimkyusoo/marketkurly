@@ -13,10 +13,10 @@ public class CommentResponseDto {
 
     private Long comment_id;
     private Long product_id;
-//    private Long user_id;
+    private Long user_id;
     private String title;
     private String comment;
-    private String nickname;
+    private String username;
     private String imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
