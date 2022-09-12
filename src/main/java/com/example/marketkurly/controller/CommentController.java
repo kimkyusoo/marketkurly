@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class CommentController {
     /* 리뷰(코멘트) 작성 */
     @PostMapping("/comment/{product_id}")
     public ResponseEntity<CommentResponseDto> createComment(@PathVariable Long product_id,
-                                                     @RequestPart(value = "comment") CommentRequestDto commentRequestDto,
-                                                     @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile) throws IOException {
+                                                            @RequestPart(value = "comment") CommentRequestDto commentRequestDto,
+                                                            @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile) throws IOException {
 
         return ResponseEntity.ok().body(commentService.createComment(product_id, commentRequestDto, multipartFile));
     }

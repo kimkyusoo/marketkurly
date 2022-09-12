@@ -3,17 +3,24 @@ package com.example.marketkurly.service;
 
 import com.example.marketkurly.dto.request.CommentRequestDto;
 import com.example.marketkurly.dto.response.CommentResponseDto;
+import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.model.Comment;
 import com.example.marketkurly.model.Product;
+import com.example.marketkurly.model.User;
 import com.example.marketkurly.repository.CommentRepository;
 import com.example.marketkurly.repository.ProductReposioty;
+import com.example.marketkurly.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -22,6 +29,8 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final ProductReposioty productReposioty;
+
+    private final UserRepository userRepository;
     private final AmazonS3Service amazonS3Service;
 
     /* 상품 리뷰 조회 */
@@ -33,16 +42,16 @@ public class CommentService {
         List<CommentResponseDto> commentResult = new ArrayList<>();
         for(Comment comments: commentList) {
             Long commentId = comments.getId();
-//            Long userId = comments.getUser().getId();
+            Long userId = comments.getUser().getId();
             Long productId = comments.getProduct().getId();
             String title = comments.getTitle();
             String comment = comments.getComment();
-            String nickname = comments.getNickname();
+            String username = comments.getUsername();
             String imageUrl = comments.getImageUrl();
             LocalDateTime createdAt = comments.getCreatedAt();
             LocalDateTime modifiedAt = comments.getModifiedAt();
 
-            CommentResponseDto commentResponseDto = new CommentResponseDto(commentId, productId, title, comment, nickname, imageUrl, createdAt, modifiedAt);
+            CommentResponseDto commentResponseDto = new CommentResponseDto(commentId, productId, userId, title, comment, username, imageUrl, createdAt, modifiedAt);
             commentResult.add(commentResponseDto);
         }
         return commentResult;
@@ -50,6 +59,12 @@ public class CommentService {
 
     /* 코멘트(리뷰) 등록 */
     public CommentResponseDto createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
+
+        User user = isPresentUser(commentRequestDto.getUsername());
+        if (null == user) {
+            return CommentResponseDto.builder().build();
+        }
+
         Product product = productReposioty.findById(product_id)
                 .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
         /* imageUrl과 filename을 기본적으로 null로 하고 이미지 파일을 등록할 경우 그 이미지 파일의 url와 name을 등록 */
@@ -64,9 +79,9 @@ public class CommentService {
         Comment comment = Comment.builder()
                 .title(commentRequestDto.getTitle())
                 .comment(commentRequestDto.getComment())
-                .nickname(commentRequestDto.getNickname())
+                .username(commentRequestDto.getUsername())
                 .product(product)
-//                .user(new User())
+                .user(user)
                 .imageUrl(imageUrl)
                 .filename(filename)
                 .build();
@@ -74,10 +89,10 @@ public class CommentService {
         return CommentResponseDto.builder()
                 .comment_id(comment.getId())
                 .product_id(comment.getProduct().getId())
-//                .user_id(comment.getUser().getId())
+                .user_id(comment.getUser().getId())
                 .title(comment.getTitle())
                 .comment(comment.getComment())
-                .nickname(comment.getNickname())
+                .username(comment.getUsername())
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
@@ -111,7 +126,7 @@ public class CommentService {
         CommentRequestDto updateComment = CommentRequestDto.builder()
                 .title(commentRequestDto.getTitle())
                 .comment(commentRequestDto.getComment())
-                .nickname(commentRequestDto.getNickname())
+                .username(commentRequestDto.getUsername())
                 .imageUrl(imageUrl)
                 .filename(filename)
                 .build();
@@ -120,10 +135,10 @@ public class CommentService {
         return CommentResponseDto.builder()
                 .comment_id(comment.getId())
                 .product_id(comment.getProduct().getId())
-//                .user_id(comment.getUser().getId())
+                .user_id(comment.getUser().getId())
                 .title(comment.getTitle())
                 .comment(comment.getComment())
-                .nickname(comment.getNickname())
+                .username(comment.getUsername())
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
@@ -141,6 +156,12 @@ public class CommentService {
         }
         commentRepository.delete(comment);
         return comment_id;
+    }
+
+    @Transactional(readOnly = true)
+    public User isPresentUser(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElse(null);
     }
 
 }
