@@ -40,11 +40,10 @@ out/
 awsS3.yml
 
 ### Test ###
-resources/2.JPG
-resources/3.JPG
-resources/CommentAPI.http
-resources/data.sql
+resources/*.JPG
+resources/*.http
+resources/*.sql
 model/Product.java
 model/User.java
-ProductRepository.java
-UserRepository.java
+repository/ProductReposioty.java
+repository/UserRepository.java

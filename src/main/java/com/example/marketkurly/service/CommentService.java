@@ -1,18 +1,13 @@
 package com.example.marketkurly.service;
 
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.example.marketkurly.dto.request.CommentRequestDto;
 import com.example.marketkurly.dto.response.CommentResponseDto;
-import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.model.Comment;
 import com.example.marketkurly.model.Product;
-import com.example.marketkurly.model.User;
 import com.example.marketkurly.repository.CommentRepository;
 import com.example.marketkurly.repository.ProductReposioty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -54,7 +49,7 @@ public class CommentService {
     }
 
     /* 코멘트(리뷰) 등록 */
-    public ResponseEntity<CommentResponseDto> createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
+    public CommentResponseDto createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
         Product product = productReposioty.findById(product_id)
                 .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
         /* imageUrl과 filename을 기본적으로 null로 하고 이미지 파일을 등록할 경우 그 이미지 파일의 url와 name을 등록 */
@@ -76,7 +71,7 @@ public class CommentService {
                 .filename(filename)
                 .build();
         commentRepository.save(comment);
-        return ResponseEntity.ok().body(CommentResponseDto.builder()
+        return CommentResponseDto.builder()
                 .comment_id(comment.getId())
                 .product_id(comment.getProduct().getId())
 //                .user_id(comment.getUser().getId())
@@ -86,11 +81,11 @@ public class CommentService {
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
-                .build());
+                .build();
     }
 
     /* 코멘트(리뷰) 수정 */
-    public ResponseEntity<CommentResponseDto> updateComment(Long comment_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
+    public CommentResponseDto updateComment(Long comment_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
         Comment comment = commentRepository.findById(comment_id).orElseThrow
                 (() -> new IllegalArgumentException("리뷰가 존재하지 않습니다."));
 
@@ -122,7 +117,7 @@ public class CommentService {
                 .build();
         comment.update(updateComment);
         commentRepository.save(comment);
-        return ResponseEntity.ok().body(CommentResponseDto.builder()
+        return CommentResponseDto.builder()
                 .comment_id(comment.getId())
                 .product_id(comment.getProduct().getId())
 //                .user_id(comment.getUser().getId())
@@ -132,11 +127,11 @@ public class CommentService {
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
-                .build());
+                .build();
     }
 
     /* 코멘트(리뷰) 삭제 */
-    public void deleteComment(Long comment_id) throws IOException {
+    public Long deleteComment(Long comment_id) throws IOException {
         Comment comment = commentRepository.findById(comment_id)
                 .orElseThrow(() -> new IllegalArgumentException("리뷰가 존재하지 않습니다."));
 
@@ -145,6 +140,7 @@ public class CommentService {
             amazonS3Service.deleteFile(comment.getFilename());
         }
         commentRepository.delete(comment);
+        return comment_id;
     }
 
 }
