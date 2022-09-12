@@ -41,7 +41,7 @@ Content-Type: multipart/form-data
 
 
 ### Update Comment(including Image file)
-PUT http://localhost:8080/api/comment/6
+PUT http://localhost:8080/api/comment/1
 Content-Type: multipart/form-data; boundary=abcd
 
 --abcd
@@ -61,7 +61,7 @@ Content-Type: multipart/form-data
 
 
 ### Update Comment(only comment)
-PUT http://localhost:8080/api/comment/5
+PUT http://localhost:8080/api/comment/2
 Content-Type: multipart/form-data; boundary=abcd
 
 --abcd
@@ -79,5 +79,5 @@ Content-Type: multipart/form-data
 
 
 ### Delete Comment
-DELETE http://localhost:8080/api/comment/6
+DELETE http://localhost:8080/api/comment/1
 Content-Type: application/json
