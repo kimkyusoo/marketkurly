@@ -79,5 +79,5 @@ Content-Type: multipart/form-data
 
 
 ### Delete Comment
-DELETE http://localhost:8080/api/comment/2
+DELETE http://localhost:8080/api/comment/1
 Content-Type: application/json
