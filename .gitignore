@@ -35,3 +35,16 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Aws S3 bucket ###
+awsS3.yml
+
+### Test ###
+resources/2.JPG
+resources/3.JPG
+resources/CommentAPI.http
+resources/data.sql
+model/Product.java
+model/User.java
+ProductRepository.java
+UserRepository.java
