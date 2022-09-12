@@ -38,3 +38,12 @@ out/
 
 ### Aws S3 bucket ###
 awsS3.yml
+
+### Test ###
+resources/*.JPG
+resources/*.http
+resources/*.sql
+Product.java
+User.java
+ProductRepository.java
+UserRepository.java
