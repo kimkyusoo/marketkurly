@@ -1,5 +1,6 @@
 package com.example.marketkurly.dto.request;
 
+import com.example.marketkurly.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

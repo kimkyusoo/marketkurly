@@ -35,3 +35,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Aws S3 bucket ###
+awsS3.yml
+
+### setting ###
+application.properties
+
+### Test ###
+resources/*.JPG
+resources/*.http
+resources/*.sql

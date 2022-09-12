@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
     private final KakaoUserService kakaoUserService;
 
-// POST방식 회원가입 API UserRequestDto에서 표현한 정규표현식을 따른 정보를 받아 UserService에서 정의한 createUser메소드에 따라 아이디와 비밀번호 확인을 거치고 이를 만족시키면 아이디 비밀번호를 생성.
+    // POST방식 회원가입 API UserRequestDto에서 표현한 정규표현식을 따른 정보를 받아 UserService에서 정의한 createUser메소드에 따라 아이디와 비밀번호 확인을 거치고 이를 만족시키면 아이디 비밀번호를 생성.
 
     @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
     public ResponseDto<?> signup(@RequestBody @Valid SignupRequestDto requestDto) {

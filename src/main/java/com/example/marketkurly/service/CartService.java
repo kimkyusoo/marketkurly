@@ -2,6 +2,7 @@ package com.example.marketkurly.service;
 
 import com.example.marketkurly.dto.request.RequestCartDto;
 import com.example.marketkurly.dto.response.ResponseDto;
+import com.example.marketkurly.model.Product;
 import com.example.marketkurly.service.impl.CartServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
