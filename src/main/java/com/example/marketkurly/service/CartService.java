@@ -1,7 +1,11 @@
 package com.example.marketkurly.service;
 
 import com.example.marketkurly.dto.request.RequestCartDto;
+import com.example.marketkurly.dto.response.ResponseCartDto;
 import com.example.marketkurly.dto.response.ResponseDto;
+import com.example.marketkurly.model.User;
+import com.example.marketkurly.repository.CartRepository;
+import com.example.marketkurly.repository.UserRepository;
 import com.example.marketkurly.service.impl.CartServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,17 +14,37 @@ import java.util.ArrayList;
 
 public class CartService implements CartServiceImpl {
 
+    private final CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final TokenProvider tokenProvider;
 
     @Override
     @Transactional
-    public ArrayList<Product> getAllCartList(HttpServletRequest request) {
-        return null;
+    public ResponseDto<?> getAllCartList(HttpServletRequest request) {
+        ResponseDto<?> checkResponse= validateCheck(request);
+        if(!checkResponse.isSuccess())
+            return checkResponse;
+
+        var = checkResponse.getData();
+        ArrayList<Product> products;
+        try {
+            products= cartRepository.findAllByProductId();
+        } catch (Exception e){
+            System.err.println(e + "productId parsing err");
+        }
+        return ResponseDto.success(products);
     }
 
     @Override
     @Transactional
-    public ResponseDto<?> addCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
-        return null;
+    public ResponseDto<?> createCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
+        requestCartDto.getProductIds();
+
+        return ResponseDto.success(
+                ResponseCartDto.builder()
+                        .id(requestCartDto.getId())
+                        .
+        );
     }
 
     @Override
@@ -35,9 +59,25 @@ public class CartService implements CartServiceImpl {
         return null;
     }
 
-    @Override
+
     @Transactional
-    public ResponseDto<?> validateCheck(HttpServletRequest request) {
-        return null;
+    private ResponseDto<?> validateCheck(HttpServletRequest request) {
+        if(null == request.getHeader("RefreshToken") || null == request.getHeader("Authorization")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
+        }
+        User user = validateUser(request);
+        if(null == user) {
+            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+        }
+        return ResponseDto.success(user);
+    }
+
+    @Transactional
+    public User validateUser(HttpServletRequest request) {
+        if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
+            return null;
+        }
+//        @todo Member를 User로 고쳐야 할 수도. 인증 부분 어떻게 되는지 몰라서 그대로 씀.
+        return tokenProvider.getMemberFromAuthentication();
     }
 }

@@ -10,5 +10,11 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestCartDto {
-    private ArrayList<Product> productId;
+    private Long id;
+    private String title;
+    private String imgURL;
+    private String price;
+    private String sum;
+    private String address;
+    private ArrayList<Product> productIds;
 }
