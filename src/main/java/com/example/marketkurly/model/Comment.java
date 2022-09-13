@@ -33,9 +33,6 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private String comment;
 
-    @Column(nullable = false)
-    private String username;
-
     @Column
     private String imageUrl;
 
@@ -58,7 +55,6 @@ public class Comment extends Timestamped{
         this.title = commentRequestDto.getTitle();
         this.comment = commentRequestDto.getComment();
         this.imageUrl = commentRequestDto.getImageUrl();
-        this.username = commentRequestDto.getUsername();
         this.filename = commentRequestDto.getFilename();
         this.user = user;
         this.product = product;

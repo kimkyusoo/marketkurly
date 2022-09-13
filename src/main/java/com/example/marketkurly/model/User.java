@@ -1,7 +1,6 @@
 package com.example.marketkurly.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
 @Entity
 public class User extends Timestamped {
 

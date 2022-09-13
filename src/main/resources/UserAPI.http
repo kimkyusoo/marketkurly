@@ -1,0 +1,19 @@
+### Signup
+POST http://localhost:8080/user/signup
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "nickname": "nick1",
+  "password": "1234",
+  "passwordConfirm": "1234"
+}
+
+### Login
+POST http://localhost:8080/user/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "1234"
+}
