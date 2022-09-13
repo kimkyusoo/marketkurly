@@ -3,6 +3,7 @@ package com.example.marketkurly.service;
 import com.example.marketkurly.dto.request.RequestCartDto;
 import com.example.marketkurly.dto.response.ResponseCartDto;
 import com.example.marketkurly.dto.response.ResponseDto;
+import com.example.marketkurly.model.Cart;
 import com.example.marketkurly.model.User;
 import com.example.marketkurly.repository.CartRepository;
 import com.example.marketkurly.repository.UserRepository;
@@ -25,7 +26,7 @@ public class CartService implements CartServiceImpl {
         if(!checkResponse.isSuccess())
             return checkResponse;
 
-        var = checkResponse.getData();
+        var checked= checkResponse.getData();
         ArrayList<Product> products;
         try {
             products= cartRepository.findAllByProductId();
@@ -38,12 +39,30 @@ public class CartService implements CartServiceImpl {
     @Override
     @Transactional
     public ResponseDto<?> createCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
-        requestCartDto.getProductIds();
+        ResponseDto<?> checkResponse= validateCheck(request);
+        if(!checkResponse.isSuccess())
+            return checkResponse;
+
+        User user= (User) checkResponse.getData();
+
+        requestCartDto.builder()
+                .user(user);
+
+        Cart cart;
+        try {
+            cart= new Cart(requestCartDto);
+        } catch (Exception e){
+            System.err.println(e + "cart request 정보 부족");
+        }
 
         return ResponseDto.success(
                 ResponseCartDto.builder()
-                        .id(requestCartDto.getId())
-                        .
+                        .id(cart.getId())
+                        .productIds(cart.getProductId())
+                        .user(cart.getUser())
+                        .price(cart.getPrice())
+                        .sum(cart.getSum())
+                        .address(cart.getAddress())
         );
     }
 

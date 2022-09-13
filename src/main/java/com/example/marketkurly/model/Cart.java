@@ -1,5 +1,6 @@
 package com.example.marketkurly.model;
 
+import com.example.marketkurly.dto.request.RequestCartDto;
 import com.example.marketkurly.dto.response.ResponseCartDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private User user;
 
     @Column(nullable = false)
     private ArrayList<Product> productId;
@@ -40,8 +42,15 @@ public class Cart {
 
 
     public Cart(ResponseCartDto chartDto) {
-        this.title = chartDto.getTitle();
-        this.imgURL = chartDto.getImgURL();
+        this.user = chartDto.getUser();
+        this.price = chartDto.getPrice();
+        this.sum = chartDto.getSum();
+        this.address = chartDto.getAddress();
+        this.productId= chartDto.getProductIds();
+    }
+
+    public Cart(RequestCartDto chartDto) {
+        this.user = chartDto.getUser();
         this.price = chartDto.getPrice();
         this.sum = chartDto.getSum();
         this.address = chartDto.getAddress();
@@ -49,8 +58,6 @@ public class Cart {
     }
 
     public void update(ResponseCartDto chartDto){
-        this.title = chartDto.getTitle();
-        this.imgURL = chartDto.getImgURL();
         this.price = chartDto.getPrice();
         this.sum = chartDto.getSum();
         this.address = chartDto.getAddress();

@@ -1,5 +1,6 @@
 package com.example.marketkurly.dto.response;
 
+import com.example.marketkurly.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +14,7 @@ import java.util.ArrayList;
 @Builder
 public class ResponseCartDto {
     private Long id;
-    private String title;
-    private String imgURL;
+    private User user;
     private String price;
     private String sum;
     private String address;
