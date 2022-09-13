@@ -8,31 +8,15 @@ import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.dto.response.UserResponseDto;
 import com.example.marketkurly.jwt.TokenProvider;
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
 import com.example.marketkurly.repository.UserRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +31,11 @@ public class UserService {
 //  회원가입. 유저가 존재하는지, 비밀번호와 비밀번호확인이 일치하는지의 여부를 if문을 통해 확인하고 이를 통과하면 user에 대한 정보를 생성.
     public ResponseDto<?> createUser(SignupRequestDto requestDto) {
         if (null != isPresentUser(requestDto.getUsername())) {
+            return ResponseDto.fail("DUPLICATED_USERNAME",
+                    "중복된 ID 입니다.");
+        }
+
+        if (null != isPresentNickname(requestDto.getNickname())) {
             return ResponseDto.fail("DUPLICATED_NICKNAME",
                     "중복된 닉네임 입니다.");
         }
@@ -65,6 +54,7 @@ public class UserService {
                 UserResponseDto.builder()
                         .id(user.getId())
                         .username(user.getUsername())
+                        .nickname(user.getNickname())
                         .createdAt(user.getCreatedAt())
                         .modifiedAt(user.getModifiedAt())
                         .build()
@@ -95,6 +85,7 @@ public class UserService {
                 UserResponseDto.builder()
                         .id(user.getId())
                         .username(user.getUsername())
+                        .nickname(user.getNickname())
                         .createdAt(user.getCreatedAt())
                         .modifiedAt(user.getModifiedAt())
                         .build()
@@ -119,6 +110,12 @@ public class UserService {
     @Transactional(readOnly = true)
     public User isPresentUser(String username) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public User isPresentNickname(String nickname) {
+        Optional<User> optionalUser = userRepository.findByNickname(nickname);
         return optionalUser.orElse(null);
     }
 
