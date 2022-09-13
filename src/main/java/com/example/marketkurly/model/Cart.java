@@ -51,7 +51,7 @@ public class Cart {
         this.productId= chartDto.getProductIds();
     }
 
-    public void update(ResponseCartDto chartDto){
+    public void update(RequestCartDto chartDto){
         this.price = chartDto.getPrice();
         this.sum = chartDto.getSum();
         this.address = chartDto.getAddress();

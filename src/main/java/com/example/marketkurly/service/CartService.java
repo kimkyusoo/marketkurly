@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class CartService implements CartServiceImpl {
 
@@ -84,13 +85,22 @@ public class CartService implements CartServiceImpl {
 
     @Override
     @Transactional
-    public ResponseDto<?> updateCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
+    public ResponseDto<?> updateCartList(Long id, RequestCartDto requestCartDto, HttpServletRequest request) {
         ResponseDto<?> checkResponse= validateCheck(request);
         if(!checkResponse.isSuccess())
             return checkResponse;
         User user= (User) checkResponse.getData();
 
-        return null;
+
+        Optional<Cart> cartOptional = cartRepository.findById(id);
+        if (cartOptional.isEmpty()){
+            return ResponseDto.fail("CART_NOT_FOUND", "생성된 장바구니가 없습니다");
+        }
+
+        Cart cart= cartOptional.orElseGet(null);
+        cart.update(requestCartDto);
+
+        return ResponseDto.success(cart);
     }
 
     //        reset all
@@ -102,9 +112,9 @@ public class CartService implements CartServiceImpl {
             return checkResponse;
         
         try {
-            cartRepository.deleteAll();
+            cartRepository.deleteAllInBatch();
         }catch (Exception e){
-            return ResponseDto.fail("delete err", "장바구니 삭제 에러");
+            return ResponseDto.fail("delete err", "장바구니 삭제 중 문제 발생");
         }
 
         return ResponseDto.success("정상적으로 장바구니가 비워졌습니다");
