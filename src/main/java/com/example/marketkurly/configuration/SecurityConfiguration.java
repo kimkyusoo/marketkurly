@@ -60,11 +60,11 @@ public class SecurityConfiguration {
         .and()
 //            권한없이 (=토큰없이) 이용가능한 api설정
         .authorizeRequests()
-        .antMatchers("/user/**").permitAll()
-        .antMatchers("/products").permitAll()
-        .antMatchers("/product/{product_id}").permitAll()
-        .antMatchers("/product/{product_id}/comment").permitAll()
-        .antMatchers("/user/kakao/callback").permitAll()
+        .antMatchers("/api/user/**").permitAll()
+        .antMatchers("/api/products").permitAll()
+        .antMatchers("/api/product/{product_id}").permitAll()
+        .antMatchers("/api/product/{product_id}/comment").permitAll()
+        .antMatchers("/api/user/kakao/callback").permitAll()
         .antMatchers("/h2-console/**").permitAll() // h2-console 사용을 위해 추가
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // preflight 허용을 위해 추가
         .anyRequest().authenticated()
