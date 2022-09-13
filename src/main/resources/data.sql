@@ -4,8 +4,8 @@ INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('제품3',
 
 INSERT
 INTO MEMBER
-(USERNAME, PASSWORD)
+(NICKNAME, PASSWORD, USERNAME)
 VALUES
-('닉네임1', '1234')
-     , ('닉네임2', '1234')
-     , ('닉네임3', '1234')
+('닉네임1', '1234', '유저네임1')
+     , ('닉네임2', '1234', '유저네임2')
+     , ('닉네임3', '1234', '유저네임3')

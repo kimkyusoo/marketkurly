@@ -7,6 +7,7 @@ import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.model.Comment;
 import com.example.marketkurly.model.Product;
 import com.example.marketkurly.model.User;
+import com.example.marketkurly.model.UserDetailsImpl;
 import com.example.marketkurly.repository.CommentRepository;
 import com.example.marketkurly.repository.ProductReposioty;
 import com.example.marketkurly.repository.UserRepository;
@@ -29,7 +30,6 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final ProductReposioty productReposioty;
-
     private final UserRepository userRepository;
     private final AmazonS3Service amazonS3Service;
 
@@ -46,24 +46,19 @@ public class CommentService {
             Long productId = comments.getProduct().getId();
             String title = comments.getTitle();
             String comment = comments.getComment();
-            String username = comments.getUsername();
+            String nickname = comments.getUser().getNickname();
             String imageUrl = comments.getImageUrl();
             LocalDateTime createdAt = comments.getCreatedAt();
             LocalDateTime modifiedAt = comments.getModifiedAt();
 
-            CommentResponseDto commentResponseDto = new CommentResponseDto(commentId, productId, userId, title, comment, username, imageUrl, createdAt, modifiedAt);
+            CommentResponseDto commentResponseDto = new CommentResponseDto(commentId, productId, userId, title, comment, nickname, imageUrl, createdAt, modifiedAt);
             commentResult.add(commentResponseDto);
         }
         return commentResult;
     }
 
     /* 코멘트(리뷰) 등록 */
-    public CommentResponseDto createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile) throws IOException {
-
-        User user = isPresentUser(commentRequestDto.getUsername());
-        if (null == user) {
-            return CommentResponseDto.builder().build();
-        }
+    public CommentResponseDto createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile, User user) throws IOException {
 
         Product product = productReposioty.findById(product_id)
                 .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
@@ -77,11 +72,11 @@ public class CommentService {
         }
 
         Comment comment = Comment.builder()
+                .user(user)
                 .title(commentRequestDto.getTitle())
                 .comment(commentRequestDto.getComment())
-                .username(commentRequestDto.getUsername())
+                .nickname(commentRequestDto.getNickname())
                 .product(product)
-                .user(user)
                 .imageUrl(imageUrl)
                 .filename(filename)
                 .build();
@@ -92,7 +87,7 @@ public class CommentService {
                 .user_id(comment.getUser().getId())
                 .title(comment.getTitle())
                 .comment(comment.getComment())
-                .username(comment.getUsername())
+                .nickname(comment.getNickname())
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
@@ -138,7 +133,7 @@ public class CommentService {
                 .user_id(comment.getUser().getId())
                 .title(comment.getTitle())
                 .comment(comment.getComment())
-                .username(comment.getUsername())
+                .nickname(comment.getNickname())
                 .imageUrl(comment.getImageUrl())
                 .createdAt(comment.getCreatedAt())
                 .modifiedAt(comment.getModifiedAt())
