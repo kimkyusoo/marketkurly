@@ -48,6 +48,7 @@ public class UserService {
         User user = User.builder()
                 .username(requestDto.getUsername())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
+                .nickname(requestDto.getNickname())
                 .build();
         userRepository.save(user);
         return ResponseDto.success(

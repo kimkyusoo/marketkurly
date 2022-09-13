@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
 @Entity
 public class User extends Timestamped {
 

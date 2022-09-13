@@ -6,8 +6,8 @@ Content-Type: application/json
 ### Create Comment(including Image file)
 POST http://localhost:8080/api/comment/1
 Content-Type: multipart/form-data; boundary=abcd
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NjMwNTIyOTB9.yIgp0roj82UGt5KK3ws6jKEu8TBTGNYCWgv301szOWg
-refreshtoken: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjM2NTUyOTB9.dNp0Xtdudz-zFm7YjZkfM-2QfcEEFHXgd0PHOK7eBmw
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NjMwNzQzNTV9.3lpUtBr1D-s1plId8rO9HnOdBBDAQC0OlzXBvMRAPMw
+refreshtoken: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjM2NzczNTV9.vo-cac1jb3KoVihNyK1Ae2hBNYFHYukj0aPDYBE1GpY
 
 --abcd
 Content-Disposition: form-data; name="comment"
