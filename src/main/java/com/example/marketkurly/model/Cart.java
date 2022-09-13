@@ -26,12 +26,6 @@ public class Cart {
     private ArrayList<Product> productId;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
-    private String imgURL;
-
-    @Column(nullable = false)
     private String price;
 
     @Column(nullable = false)

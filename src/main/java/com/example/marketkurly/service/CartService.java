@@ -17,6 +17,7 @@ public class CartService implements CartServiceImpl {
 
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
     private final TokenProvider tokenProvider;
 
     @Override
@@ -25,14 +26,17 @@ public class CartService implements CartServiceImpl {
         ResponseDto<?> checkResponse= validateCheck(request);
         if(!checkResponse.isSuccess())
             return checkResponse;
-
-        var checked= checkResponse.getData();
+        
+//        @todo 로그인 인증 과정만 제대로 처러하면 뒤에 처리된 객체는 필요 없을 듯
+//        var checked= checkResponse.getData();
+        
         ArrayList<Product> products;
         try {
             products= cartRepository.findAllByProductId();
         } catch (Exception e){
-            System.err.println(e + "productId parsing err");
+            return ResponseDto.fail("RDS err", e + "productId parsing err");
         }
+
         return ResponseDto.success(products);
     }
 
@@ -42,17 +46,29 @@ public class CartService implements CartServiceImpl {
         ResponseDto<?> checkResponse= validateCheck(request);
         if(!checkResponse.isSuccess())
             return checkResponse;
-
         User user= (User) checkResponse.getData();
 
         requestCartDto.builder()
                 .user(user);
 
-        Cart cart;
+
+        Cart cart= new Cart(requestCartDto);
+
+        ArrayList<Product> productArrayList;
         try {
-            cart= new Cart(requestCartDto);
+            productArrayList= cartRepository.findAllByProductId();
         } catch (Exception e){
-            System.err.println(e + "cart request 정보 부족");
+            return ResponseDto.fail("RDS err", e + "productId parsing err");
+        }
+
+        String sum= "";
+        for (var productId : productArrayList){
+//            @todo product 객체 가져와야 가격 정보를 가져올 수 있는데 없어서 임의로 넣음.
+            try {
+                String price= productRepository.findByProduct(productId);
+            }catch (Exception e){
+                return ResponseDto.fail("RDS err", e + "productId parsing err");
+            }
         }
 
         return ResponseDto.success(
@@ -69,13 +85,29 @@ public class CartService implements CartServiceImpl {
     @Override
     @Transactional
     public ResponseDto<?> updateCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
+        ResponseDto<?> checkResponse= validateCheck(request);
+        if(!checkResponse.isSuccess())
+            return checkResponse;
+        User user= (User) checkResponse.getData();
+
         return null;
     }
 
+    //        reset all
     @Override
     @Transactional
     public ResponseDto<?> deleteCartList(HttpServletRequest request) {
-        return null;
+        ResponseDto<?> checkResponse= validateCheck(request);
+        if(!checkResponse.isSuccess())
+            return checkResponse;
+        
+        try {
+            cartRepository.deleteAll();
+        }catch (Exception e){
+            return ResponseDto.fail("delete err", "장바구니 삭제 에러");
+        }
+
+        return ResponseDto.success("정상적으로 장바구니가 비워졌습니다");
     }
 
 
