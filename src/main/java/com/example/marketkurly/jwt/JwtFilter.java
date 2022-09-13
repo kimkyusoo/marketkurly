@@ -1,7 +1,7 @@
 package com.example.marketkurly.jwt;
 
 import com.example.marketkurly.dto.response.ResponseDto;
-import com.example.marketkurly.service.UserDetailsServiceImpl;
+import com.example.marketkurly.service.impl.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;

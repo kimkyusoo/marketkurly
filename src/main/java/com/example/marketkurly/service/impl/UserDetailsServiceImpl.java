@@ -1,10 +1,9 @@
-package com.example.marketkurly.service;
+package com.example.marketkurly.service.impl;
 
 
 
 
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
 import com.example.marketkurly.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

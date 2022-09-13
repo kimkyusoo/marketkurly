@@ -3,11 +3,9 @@ package com.example.marketkurly.service;
 
 import com.example.marketkurly.dto.request.CommentRequestDto;
 import com.example.marketkurly.dto.response.CommentResponseDto;
-import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.model.Comment;
 import com.example.marketkurly.model.Product;
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
 import com.example.marketkurly.repository.CommentRepository;
 import com.example.marketkurly.repository.ProductReposioty;
 import com.example.marketkurly.repository.UserRepository;
@@ -15,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,7 +71,7 @@ public class CommentService {
                 .user(user)
                 .title(commentRequestDto.getTitle())
                 .comment(commentRequestDto.getComment())
-                .nickname(commentRequestDto.getNickname())
+                .nickname(user.getNickname())
                 .product(product)
                 .imageUrl(imageUrl)
                 .filename(filename)

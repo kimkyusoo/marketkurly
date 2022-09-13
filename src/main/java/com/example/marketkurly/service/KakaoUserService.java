@@ -2,7 +2,7 @@ package com.example.marketkurly.service;
 
 import com.example.marketkurly.dto.request.KakaoUserInfoDto;
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
+import com.example.marketkurly.service.impl.UserDetailsImpl;
 import com.example.marketkurly.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Member")
+@Table
 @Entity
 public class User extends Timestamped {
 
@@ -28,12 +28,12 @@ public class User extends Timestamped {
     @Column(nullable = false)
     private String username;
 
+    @Column(unique = true)
+    private String nickname;
+
     @Column(nullable = false)
     @JsonIgnore
     private String password;
-
-    @Column
-    private String nickname;
 
     @Column(unique = true)
     private Long kakaoId;

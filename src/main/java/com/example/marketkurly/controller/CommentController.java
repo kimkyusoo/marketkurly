@@ -4,15 +4,13 @@ package com.example.marketkurly.controller;
 import com.example.marketkurly.dto.request.CommentRequestDto;
 import com.example.marketkurly.dto.response.CommentResponseDto;
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
 import com.example.marketkurly.service.CommentService;
+import com.example.marketkurly.service.impl.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -39,6 +37,7 @@ public class CommentController {
                                                             @RequestPart(value = "comment") CommentRequestDto commentRequestDto,
                                                             @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile,
                                                             @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+
         User user = userDetails.getUser();
 
         return ResponseEntity.ok().body(commentService.createComment(product_id, commentRequestDto, multipartFile, user));

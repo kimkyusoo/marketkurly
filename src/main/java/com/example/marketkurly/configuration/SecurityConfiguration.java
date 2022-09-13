@@ -2,10 +2,10 @@ package com.example.marketkurly.configuration;
 
 
 
-import com.example.marketkurly.dto.request.AccessDeniedHandlerException;
-import com.example.marketkurly.dto.request.AuthenticationEntryPointException;
+import com.example.marketkurly.exception.AccessDeniedHandlerException;
+import com.example.marketkurly.exception.AuthenticationEntryPointException;
 import com.example.marketkurly.jwt.TokenProvider;
-import com.example.marketkurly.service.UserDetailsServiceImpl;
+import com.example.marketkurly.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -61,9 +61,10 @@ public class SecurityConfiguration {
 //            권한없이 (=토큰없이) 이용가능한 api설정
         .authorizeRequests()
         .antMatchers("/user/**").permitAll()
-        .antMatchers("/api/products").permitAll()
-        .antMatchers("/api/product/**").permitAll()
-        .antMatchers("/api/comment/{id}").permitAll()
+        .antMatchers("/products").permitAll()
+        .antMatchers("/product/{product_id}").permitAll()
+        .antMatchers("/product/{product_id}/comment").permitAll()
+        .antMatchers("/user/kakao/callback").permitAll()
         .antMatchers("/h2-console/**").permitAll() // h2-console 사용을 위해 추가
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // preflight 허용을 위해 추가
         .anyRequest().authenticated()

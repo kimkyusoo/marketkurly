@@ -3,8 +3,13 @@ INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('제품2',
 INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('제품3', 'http:dummy1.com', 3000, '디테일3입니다');
 
 INSERT
+<<<<<<< HEAD
 INTO MEMBER
 (NICKNAME, PASSWORD, USERNAME)
+=======
+INTO USER
+(USERNAME, PASSWORD)
+>>>>>>> upstream/master
 VALUES
 ('닉네임1', '1234', '유저네임1')
      , ('닉네임2', '1234', '유저네임2')
