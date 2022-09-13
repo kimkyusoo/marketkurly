@@ -52,7 +52,6 @@ public class SecurityConfiguration {
         .exceptionHandling()
         .authenticationEntryPoint(authenticationEntryPointException)
         .accessDeniedHandler(accessDeniedHandlerException)
-
         .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
