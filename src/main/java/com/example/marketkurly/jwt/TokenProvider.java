@@ -6,7 +6,7 @@ import com.example.marketkurly.dto.response.ResponseDto;
 import com.example.marketkurly.model.Authority;
 import com.example.marketkurly.model.RefreshToken;
 import com.example.marketkurly.model.User;
-import com.example.marketkurly.model.UserDetailsImpl;
+import com.example.marketkurly.service.impl.UserDetailsImpl;
 import com.example.marketkurly.repository.RefreshTokenRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

@@ -1,6 +1,8 @@
-package com.example.marketkurly.model;
+package com.example.marketkurly.service.impl;
 
 
+import com.example.marketkurly.model.Authority;
+import com.example.marketkurly.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,7 @@ package com.example.marketkurly.configuration;
 
 import com.example.marketkurly.jwt.JwtFilter;
 import com.example.marketkurly.jwt.TokenProvider;
-import com.example.marketkurly.service.UserDetailsServiceImpl;
+import com.example.marketkurly.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
