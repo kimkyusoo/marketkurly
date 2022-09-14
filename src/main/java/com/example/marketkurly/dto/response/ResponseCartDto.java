@@ -1,4 +1,4 @@
-package com.example.marketkurly.dto.request;
+package com.example.marketkurly.dto.response;
 
 import com.example.marketkurly.model.Product;
 import com.example.marketkurly.model.User;
@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestCartDto {
+@Builder
+public class ResponseCartDto {
+    private Long id;
     private Long sum;
     private String address;
 
-    private List<Long> productIds;
+//    private List<Long> productIds;
+    private List<Product> products;
 }
