@@ -20,19 +20,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CartService{
+public class CartService implements CartServiceImpl{
 
     private CartRepository cartRepository;
     private UserRepository userRepository;
     private ProductReposioty productRepository;
     private TokenProvider tokenProvider;
 
-    //    @Override
+    @Override
     @Transactional
     public ResponseDto<?> getAllCartList(HttpServletRequest request) {
-        ResponseDto<?> checkResponse= validateCheck(request);
-        if(!checkResponse.isSuccess())
-            return checkResponse;
+//        ResponseDto<?> checkResponse= validateCheck(request);
+//        if(!checkResponse.isSuccess())
+//            return checkResponse;
 
         Cart cart;
         try {
@@ -56,12 +56,12 @@ public class CartService{
         return ResponseDto.success(productArrayList);
     }
 
-    //    @Override
+    @Override
     @Transactional
     public ResponseDto<?> createCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
-        ResponseDto<?> checkResponse= validateCheck(request);
-        if(!checkResponse.isSuccess())
-            return checkResponse;
+//        ResponseDto<?> checkResponse= validateCheck(request);
+//        if(!checkResponse.isSuccess())
+//            return checkResponse;
 
         Cart cart= new Cart(requestCartDto);
 
@@ -106,13 +106,12 @@ public class CartService{
 
     
 
-//    @Override
+    @Override
     @Transactional
     public ResponseDto<?> updateCartList(RequestCartDto requestCartDto, HttpServletRequest request) {
-        Long id;
-        ResponseDto<?> checkResponse= validateCheck(request);
-        if(!checkResponse.isSuccess())
-            return checkResponse;
+//        ResponseDto<?> checkResponse= validateCheck(request);
+//        if(!checkResponse.isSuccess())
+//            return checkResponse;
 
         List<Cart> cartList;
         try {
@@ -134,12 +133,12 @@ public class CartService{
     }
 
 
-//    @Override
+    @Override
     @Transactional
     public ResponseDto<?> deleteAllCartList(HttpServletRequest request) {
-        ResponseDto<?> checkResponse= validateCheck(request);
-        if(!checkResponse.isSuccess())
-            return checkResponse;
+//        ResponseDto<?> checkResponse= validateCheck(request);
+//        if(!checkResponse.isSuccess())
+//            return checkResponse;
 
         try {
             cartRepository.deleteAllInBatch();
@@ -150,12 +149,12 @@ public class CartService{
         return ResponseDto.success("정상적으로 장바구니가 비워졌습니다");
     }
 
-//    @Override
+    @Override
     @Transactional
     public ResponseDto<?> removeOneProduct(Long productId, HttpServletRequest request) {
-        ResponseDto<?> checkResponse= validateCheck(request);
-        if(!checkResponse.isSuccess())
-            return checkResponse;
+//        ResponseDto<?> checkResponse= validateCheck(request);
+//        if(!checkResponse.isSuccess())
+//            return checkResponse;
 
         List<Cart> cartList;
         try {

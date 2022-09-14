@@ -27,6 +27,10 @@ public class Cart {
     @Column(nullable = false)
     private String address;
 
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_Id")
+    private User user;
+
     @ElementCollection
     private List<Long> productIds;
     

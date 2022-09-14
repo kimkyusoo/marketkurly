@@ -14,4 +14,5 @@ public interface CartServiceImpl {
     ResponseDto<?> updateCartList(RequestCartDto requestCartDto, HttpServletRequest request);
     ResponseDto<?> deleteAllCartList(HttpServletRequest request);
     ResponseDto<?> removeOneProduct(Long productId, HttpServletRequest request);
+
 }
