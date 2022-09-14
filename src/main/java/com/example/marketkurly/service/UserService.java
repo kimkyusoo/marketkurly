@@ -30,15 +30,6 @@ public class UserService {
     @Transactional
 //  회원가입. 유저가 존재하는지, 비밀번호와 비밀번호확인이 일치하는지의 여부를 if문을 통해 확인하고 이를 통과하면 user에 대한 정보를 생성.
     public ResponseDto<?> createUser(SignupRequestDto requestDto) {
-        if (null != isPresentUser(requestDto.getUsername())) {
-            return ResponseDto.fail("DUPLICATED_USERNAME",
-                    "중복된 ID 입니다.");
-        }
-
-        if (null != isPresentNickname(requestDto.getNickname())) {
-            return ResponseDto.fail("DUPLICATED_NICKNAME",
-                    "중복된 닉네임 입니다.");
-        }
 
         if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
             return ResponseDto.fail("PASSWORDS_NOT_MATCHED",
@@ -50,18 +41,35 @@ public class UserService {
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .nickname(requestDto.getNickname())
                 .build();
+
         userRepository.save(user);
-        return ResponseDto.success(
-                UserResponseDto.builder()
-                        .id(user.getId())
-                        .username(user.getUsername())
-                        .nickname(user.getNickname())
-                        .createdAt(user.getCreatedAt())
-                        .modifiedAt(user.getModifiedAt())
-                        .build()
-        );
+        return ResponseDto.success("회원가입 완료");
     }
 
+    public ResponseDto<?> checkUser(SignupRequestDto requestDto) {
+        Optional<User> user = userRepository.findByUsername(requestDto.getUsername());
+        if (null != isPresentUser(requestDto.getUsername()))
+            return ResponseDto.fail("DUPLICATED_USERNAME", "중복된 ID 입니다.");
+        return ResponseDto.success("사용 가능한 ID입니다.");
+    }
+
+    public ResponseDto<?> checkNickname(SignupRequestDto requestDto) {
+        Optional<User> nickname = userRepository.findByNickname(requestDto.getNickname());
+        if (null != isPresentNickname(requestDto.getNickname()))
+            return ResponseDto.fail("DUPLICATED_NICKANAME", "중복된 닉네임 입니다.");
+        return ResponseDto.success("사용 가능한 닉네임 입니다.");
+    }
+    @Transactional(readOnly = true)
+    public User isPresentUser(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public User isPresentNickname(String nickname) {
+        Optional<User> optionalUser = userRepository.findByNickname(nickname);
+        return optionalUser.orElse(null);
+    }
 
     @Transactional
 //  로그인. 가입할때 사용된 정보를 SignupRequestDto에 보내고 HttpServletResponse에 속한 권한이 확인.
@@ -70,12 +78,12 @@ public class UserService {
     public ResponseDto<?> login(LoginRequestDto requestDto, HttpServletResponse response) {
         User user = isPresentUser(requestDto.getUsername());
         if (null == user) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
+            return ResponseDto.fail("USER_NOT_FOUND",
                     "사용자를 찾을 수 없습니다.");
         }
 
         if (!user.validatePassword(passwordEncoder, requestDto.getPassword())) {
-            return ResponseDto.fail("INVALID_MEMBER", "비밀번호가 틀렸습니다..");
+            return ResponseDto.fail("INVALID_USER", "비밀번호가 틀렸습니다..");
         }
 
 
@@ -92,11 +100,11 @@ public class UserService {
                         .build()
         );
     }
-
     //  로그아웃. HttpServletRequest에 있는 권한을 보내 토큰을 확인하여 일치하지 않거나 유저 정보가 없을 경우 오류 메시지를 출력
     //  정상일 경우 tokenProvider에 유저에게 있는 리프레시토큰 삭제를 진행
+
     public ResponseDto<?> logout(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
         User user = tokenProvider.getUserFromAuthentication();
@@ -106,18 +114,6 @@ public class UserService {
         }
 
         return tokenProvider.deleteRefreshToken(user);
-    }
-
-    @Transactional(readOnly = true)
-    public User isPresentUser(String username) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        return optionalUser.orElse(null);
-    }
-
-    @Transactional(readOnly = true)
-    public User isPresentNickname(String nickname) {
-        Optional<User> optionalUser = userRepository.findByNickname(nickname);
-        return optionalUser.orElse(null);
     }
 
     //  TokenDto와 HttpServletResponse 응답을 헤더에 보낼 경우
