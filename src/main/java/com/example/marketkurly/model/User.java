@@ -34,12 +34,6 @@ public class User extends Timestamped {
     @JsonIgnore
     private String password;
 
-    @Column(unique = true)
-    private Long kakaoId;
-
-    private String email;
-
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
@@ -64,11 +58,8 @@ public class User extends Timestamped {
         return passwordEncoder.matches(password, this.password);
     }
 
-    public User(String username, String password, String email, Long kakaoId){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.kakaoId = kakaoId;
-
     }
 }

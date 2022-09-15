@@ -46,30 +46,30 @@ public class UserService {
         return ResponseDto.success("회원가입 완료");
     }
 
-    public ResponseDto<?> checkUser(SignupRequestDto requestDto) {
-        Optional<User> user = userRepository.findByUsername(requestDto.getUsername());
-        if (null != isPresentUser(requestDto.getUsername()))
-            return ResponseDto.fail("DUPLICATED_USERNAME", "중복된 ID 입니다.");
-        return ResponseDto.success("사용 가능한 ID입니다.");
-    }
-
-    public ResponseDto<?> checkNickname(SignupRequestDto requestDto) {
-        Optional<User> nickname = userRepository.findByNickname(requestDto.getNickname());
-        if (null != isPresentNickname(requestDto.getNickname()))
-            return ResponseDto.fail("DUPLICATED_NICKANAME", "중복된 닉네임 입니다.");
-        return ResponseDto.success("사용 가능한 닉네임 입니다.");
-    }
+//    public ResponseDto<?> checkUser(SignupRequestDto requestDto) {
+//        Optional<User> user = userRepository.findByUsername(requestDto.getUsername());
+//        if (null != isPresentUser(requestDto.getUsername()))
+//            return ResponseDto.fail("DUPLICATED_USERNAME", "중복된 ID 입니다.");
+//        return ResponseDto.success("사용 가능한 ID입니다.");
+//    }
+//
+//    public ResponseDto<?> checkNickname(SignupRequestDto requestDto) {
+//        Optional<User> nickname = userRepository.findByNickname(requestDto.getNickname());
+//        if (null != isPresentNickname(requestDto.getNickname()))
+//            return ResponseDto.fail("DUPLICATED_NICKANAME", "중복된 닉네임 입니다.");
+//        return ResponseDto.success("사용 가능한 닉네임 입니다.");
+//    }
     @Transactional(readOnly = true)
     public User isPresentUser(String username) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         return optionalUser.orElse(null);
     }
-
-    @Transactional(readOnly = true)
-    public User isPresentNickname(String nickname) {
-        Optional<User> optionalNickname = userRepository.findByNickname(nickname);
-        return optionalNickname.orElse(null);
-    }
+//
+//    @Transactional(readOnly = true)
+//    public User isPresentNickname(String nickname) {
+//        Optional<User> optionalNickname = userRepository.findByNickname(nickname);
+//        return optionalNickname.orElse(null);
+//    }
 
     @Transactional
 //  로그인. 가입할때 사용된 정보를 SignupRequestDto에 보내고 HttpServletResponse에 속한 권한이 확인.
