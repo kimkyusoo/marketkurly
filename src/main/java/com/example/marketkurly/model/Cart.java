@@ -45,6 +45,13 @@ public class Cart {
         this.productIds = chartDto.getProductIds();
     }
 
+    public Cart(RequestCartDto chartDto, User user) {
+        this.sum = chartDto.getSum();
+        this.address = chartDto.getAddress();
+        this.productIds = chartDto.getProductIds();
+        this.user= user;
+    }
+
     public void updateSumPrice(Long sum){
         this.sum= sum;
     }

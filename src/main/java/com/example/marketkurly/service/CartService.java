@@ -33,10 +33,11 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+        User user= tokenProvider.getUserFromAuthentication();
 
         Cart cart;
         try {
-            var cartOptional= cartRepository.findAllBy();
+            var cartOptional= cartRepository.findAllByUser(user);
             cart= cartOptional.orElseGet(null);
         } catch (Exception e){
             return ResponseDto.fail("RDS_ERR", e + "전체 조회 중 cart parsing err");
@@ -62,12 +63,13 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+        User user= tokenProvider.getUserFromAuthentication();
 
         Cart cart= new Cart(requestCartDto);
 
         List<Product> productArrayList= new ArrayList<>();
         try {
-            var cartInfo= cartRepository.findAllBy().orElseGet(null);
+            var cartInfo= cartRepository.findAllByUser(user).orElseGet(null);
 
             try {
                 for (var id: cartInfo.getProductIds()){
@@ -112,21 +114,19 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+        User user= tokenProvider.getUserFromAuthentication();
 
-        List<Cart> cartList;
+        Cart cart;
         try {
-            cartList = cartRepository.findAll();
+            cart = cartRepository.findAllByUser(user).orElseGet(null);
         }catch (Exception e){
             return ResponseDto.fail("RDS_ERR", e + "cartRepository parsing err");
         }
 
-        if (cartList.isEmpty()){
+        if (cart == null){
             return ResponseDto.fail("CART_NOT_FOUND", "생성된 장바구니가 없습니다");
         }
 
-//        @todo 잘 모르겠는데... 꼬였다.
-        int cartSize= cartList.size();
-        Cart cart= (cartSize == 1) ? cartList.get(0) : cartList.get(cartSize-1);
         cart.update(requestCartDto);
 
         return ResponseDto.success(cart);
@@ -139,9 +139,17 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+        User user= tokenProvider.getUserFromAuthentication();
+
+        Cart cart;
+        try {
+            cart= cartRepository.findAllByUser(user).orElseGet(null);
+        }catch (Exception e){
+            return ResponseDto.fail("RDS_ERR", "장바구니 load 문제 발생");
+        }
 
         try {
-            cartRepository.deleteAllInBatch();
+            cartRepository.deleteById(cart.getId());
         }catch (Exception e){
             return ResponseDto.fail("DELETE_ERR", "장바구니 삭제 중 문제 발생");
         }
@@ -156,20 +164,18 @@ public class CartService implements CartServiceImpl{
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
 
-        List<Cart> cartList;
+        User user= tokenProvider.getUserFromAuthentication();
+
+        Cart cart;
         try {
-            cartList = cartRepository.findAll();
+            cart = cartRepository.findAllByUser(user).orElseGet(null);
         }catch (Exception e){
-            return ResponseDto.fail("RDS_ERR", e + "cartRepository parsing err");
+            return ResponseDto.fail("RDS_ERR", e + "장바구니 load 문제 발생");
         }
 
-        if (cartList.isEmpty()){
+        if (cart == null){
             return ResponseDto.fail("CART_NOT_FOUND", "생성된 장바구니가 없습니다");
         }
-
-//        @todo 잘 모르겠는데... 꼬였다.
-        int cartSize= cartList.size();
-        Cart cart= (cartSize == 1) ? cartList.get(0) : cartList.get(cartSize-1);
 
         cart.updateProductIds(productId);
 
