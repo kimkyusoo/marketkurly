@@ -13,8 +13,5 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserResponseDto {
     private Long id;
-    private String username;
     private String nickname;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 }

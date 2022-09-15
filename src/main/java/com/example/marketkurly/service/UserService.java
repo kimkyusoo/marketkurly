@@ -93,10 +93,7 @@ public class UserService {
         return ResponseDto.success(
                 UserResponseDto.builder()
                         .id(user.getId())
-                        .username(user.getUsername())
                         .nickname(user.getNickname())
-                        .createdAt(user.getCreatedAt())
-                        .modifiedAt(user.getModifiedAt())
                         .build()
         );
     }
