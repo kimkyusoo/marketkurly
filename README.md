@@ -2,30 +2,47 @@
 
 # ☑️요약
 
+
 # 9조 클론코딩
+
 
 **클론 대상 사이트** : 마켓컬리
 
+
 📸  **클론 페이지** : 로그인, 회원가입, 메인, 장바구니
+
 
 🛠  **클론 기능** : 로그인, 회원가입, 페이지 조회(메인, 상세), 리뷰 CRUD, 장바구니 CRUD
 
+
 ➤ [시연영상 바로가기]
+
 
 # 📅 프로젝트 기간 및 팀원 👨🏻‍💻 👩‍💻
 **2022.09.09 ~ 2022.09.15**
 
+
 👨‍👩‍👧 **Back-End** : 강민승, 김규수, 정동섭
 
+
 👨‍👦 **Front-End** : 강민택, 이예지
+
+
 # ⚔️ 기술 스택
 
-# API 명세서
 
+# 와이어프레임
+![image](https://user-images.githubusercontent.com/110078419/190320028-2e399b04-0ac8-43a2-b990-ffffbf471aa2.png)
+
+
+# API 명세서
 ![API 명세서 1](https://user-images.githubusercontent.com/110078419/190299842-a5472828-6d4f-4903-aafc-215bb095c92e.PNG)
 ![API 명세서 2](https://user-images.githubusercontent.com/110078419/190299855-27624861-7a80-4f93-871c-eea2e71358a3.PNG)
 ![API 명세서 3](https://user-images.githubusercontent.com/110078419/190299865-ca436881-c4b1-4729-8a20-307981bda723.PNG)
 
+
+# ERD
+![image](https://user-images.githubusercontent.com/110078419/190319748-27cec1d5-f0e6-4e7e-8ce4-9170f39b293f.png)
 
 
 # 📜  페이지 설명
@@ -46,6 +63,7 @@
 ![image](https://user-images.githubusercontent.com/110078419/190301307-849662ee-6c16-4522-b4b9-bfdb8b4377b2.png)
 전체 상품의 조회. 특정 상품의 이미지를 클릭하면 단일 상품 조회 페이지로 이동.
 
+
 ![image](https://user-images.githubusercontent.com/110078419/190301389-4ed5cfec-7598-4981-bf61-d420766a83b9.png)
 단일 상품 페이지 - 특정 상품에 대한 세부적인 내용과 함께 해당 상품을 구매한 사용자들의 상품평이 작성된 내용을 표시.
 
@@ -54,17 +72,18 @@
 ![image](https://user-images.githubusercontent.com/110078419/190301585-a44a27c9-e666-4236-b16e-58b1b3622ba9.png)
 상품에서 장바구니 버튼을 클릭시 이동되며 장바구니 페이지에서는 추가된 상품의 내용 및 장바구니 비우기(삭제), 주문하기의 기능이 추가
 
+
 # ⛳️  역할 담당
 👨‍👩‍👧 **Back-End**  
-
 로그인, 회원가입 (김규수)
 
 리뷰 CRUD, 이미지 업로드 (강민승)
 
 장바구니 CRUD, 상품전체 조회, 단일 상품 조회 (정동섭)
 
-👨‍👦 **Front-End** 
 
+
+👨‍👦 **Front-End** 
 로그인, 회원가입, 리뷰 페이지 (이예지)
 
 상품 조회 페이지(전체, 단일 상품), 장바구니 페이지 (강민택)
@@ -84,6 +103,10 @@ Cors에 대한 요청을 지난주차와 동일하게 진행하였으나 에러�
 3. S3
 이미지 업로드를 구현한 팀원과 서버를 배포한 팀원이 달랐기에 S3의 경로에 대하여 오류가 발생
 -> 서버를 배포하는 팀원의 코드에 S3경로에 대한 정의를 위해 yml파일을 작성하여 서버를 배포한 팀원의 이미지 업로드 경로가 이미지 업로드 구현한 팀원이 생성한 S3의 경로로 설정
+
+
+👨‍👦 **Front-End** 
+
 
 
 <h3 align="center"><b>📂 Project Directory Structure 📁</b></h3>
