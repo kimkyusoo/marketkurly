@@ -29,11 +29,27 @@ public class Cart {
 
     @ElementCollection
     private List<Long> productIds;
-    
+
+
+//    @ManyToOne//(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_Id")
+//    private User user;
+
+    @OneToOne
+    private User user;
+
+
     public Cart(RequestCartDto chartDto) {
         this.sum = chartDto.getSum();
         this.address = chartDto.getAddress();
         this.productIds = chartDto.getProductIds();
+    }
+
+    public Cart(RequestCartDto chartDto, User user) {
+        this.sum = chartDto.getSum();
+        this.address = chartDto.getAddress();
+        this.productIds = chartDto.getProductIds();
+        this.user= user;
     }
 
     public void updateSumPrice(Long sum){
