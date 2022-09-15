@@ -41,8 +41,8 @@ public class CartController {
 
     //    장바구니에서 상품 하나 삭제하기
     @RequestMapping(value = "/api/cart/{productId}", method = RequestMethod.PATCH)
-    public ResponseDto<?> removeOneProduct(@PathVariable Long productId, HttpServletRequest request){
-        return cartService.removeOneProduct(productId, request);
+    public ResponseDto<?> toggleAddOrRemoveProduct(@PathVariable Long productId, HttpServletRequest request){
+        return cartService.toggleProduct(productId, request);
     }
 
 }

@@ -57,7 +57,11 @@ public class Cart {
     }
 
     public void updateProductIds(Long selectedId){
-        this.productIds.remove(selectedId);
+        if (this.productIds.contains(selectedId)){
+            this.productIds.remove(selectedId);
+        }else {
+            this.productIds.add(selectedId);
+        }
     }
 
     public void update(RequestCartDto chartDto){
