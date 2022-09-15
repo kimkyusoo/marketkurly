@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartService implements CartServiceImpl{
@@ -114,6 +113,7 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+
         User user= tokenProvider.getUserFromAuthentication();
 
         Cart cart;
@@ -139,6 +139,7 @@ public class CartService implements CartServiceImpl{
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
+
         User user= tokenProvider.getUserFromAuthentication();
 
         Cart cart;
@@ -159,7 +160,7 @@ public class CartService implements CartServiceImpl{
 
     @Override
     @Transactional
-    public ResponseDto<?> removeOneProduct(Long productId, HttpServletRequest request) {
+    public ResponseDto<?> toggleProduct(Long productId, HttpServletRequest request) {
 //        ResponseDto<?> checkResponse= validateCheck(request);
 //        if(!checkResponse.isSuccess())
 //            return checkResponse;
