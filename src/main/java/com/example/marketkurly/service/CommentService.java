@@ -40,7 +40,7 @@ public class CommentService {
     public ResponseEntity<List<CommentResponseDto>> getComment(Long product_id, HttpServletRequest request) {
 
         /* 헤더에 토큰이 존재하는지 여부 검증 */
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -78,7 +78,7 @@ public class CommentService {
     public ResponseEntity<CommentResponseDto> createComment(Long product_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile, HttpServletRequest request) throws IOException {
 
         /* 헤더에 토큰이 존재하는지 여부 검증 */
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -129,7 +129,7 @@ public class CommentService {
     public ResponseEntity<CommentResponseDto> updateComment(Long comment_id, CommentRequestDto commentRequestDto, MultipartFile multipartFile, HttpServletRequest request) throws IOException {
 
         /* 헤더에 토큰이 존재하는지 여부 검증 */
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -194,7 +194,7 @@ public class CommentService {
     public ResponseEntity<Long> deleteComment(Long comment_id, HttpServletRequest request) throws IOException {
 
         /* 헤더에 토큰이 존재하는지 여부 검증 */
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return ResponseEntity.badRequest().build();
         }
 
