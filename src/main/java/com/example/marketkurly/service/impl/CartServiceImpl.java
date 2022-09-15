@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 public interface CartServiceImpl {
+    @Transactional
     ResponseDto<?> getAllCartList(HttpServletRequest request);
+    @Transactional
     ResponseDto<?> createCartList(RequestCartDto requestCartDto, HttpServletRequest request);
+    @Transactional
     ResponseDto<?> updateCartList(RequestCartDto requestCartDto, HttpServletRequest request);
+    @Transactional
     ResponseDto<?> deleteAllCartList(HttpServletRequest request);
-    ResponseDto<?> removeOneProduct(Long productId, HttpServletRequest request);
-
+    @Transactional
+    ResponseDto<?> toggleProduct(Long productId, HttpServletRequest request);
 }
