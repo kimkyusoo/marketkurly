@@ -92,15 +92,18 @@
 # 💡Trouble Shooting
 👨‍👩‍👧 **Back-End** 
 1. API명세서
+
 회원가입의 중복성 검사를 하나의 CRUD로 구현했으나 API명세서 설계시 중복성 검사에 대한 API를 개별로 구현하여 오류 발생.
 -> 설계한 명세서대로 중복성 검사에 대한 CRUD를 개별로 구현함으로서 해결
 -> 이 경우 Postman으로 회원가입 기능을 구현해보았을 때 실제 회원가입의 진행 절차대로 idCheck와 nicknameCheck를 진행한 후에 회원가입이 진행되는것을 확인.
 
 2. Cors
+
 Cors에 대한 요청을 지난주차와 동일하게 진행하였으나 에러가 발생
 -> WebMvcConfigurer를 implements하는 WebMvcConfig 클래스를 생성하여 구현 + h2, api에 대하여 권한없이 요청 가능하게 설정한 SecurityConfiguration 클래스에 CorsConfigurationSource를 정의하여 Cors에 대하여 추가 설정을 통해 해결
 
 3. S3
+
 이미지 업로드를 구현한 팀원과 서버를 배포한 팀원이 달랐기에 S3의 경로에 대하여 오류가 발생
 -> 서버를 배포하는 팀원의 코드에 S3경로에 대한 정의를 위해 yml파일을 작성하여 서버를 배포한 팀원의 이미지 업로드 경로가 이미지 업로드 구현한 팀원이 생성한 S3의 경로로 설정
 
