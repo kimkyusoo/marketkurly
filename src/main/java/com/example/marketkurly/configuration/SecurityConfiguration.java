@@ -66,7 +66,6 @@ public class SecurityConfiguration {
         .antMatchers("/api/products").permitAll()
         .antMatchers("/api/product/{product_id}").permitAll()
         .antMatchers("/api/product/{product_id}/comment").permitAll()
-        .antMatchers("/api/user/kakao/callback").permitAll()
         .antMatchers("/h2-console/**").permitAll() // h2-console 사용을 위해 추가
         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // preflight 허용을 위해 추가
         .anyRequest().authenticated()
