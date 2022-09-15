@@ -19,6 +19,6 @@ public class ResponseCartDto {
     private Long sum;
     private String address;
 
-//    private List<Long> productIds;
+    //    private List<Long> productIds;
     private List<Product> products;
 }

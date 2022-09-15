@@ -106,7 +106,7 @@ public class CartService implements CartServiceImpl{
     }
 
 
-    
+
 
     @Override
     @Transactional
@@ -182,11 +182,11 @@ public class CartService implements CartServiceImpl{
         return ResponseDto.success(cart);
     }
 
-    
-//    User 인증
+
+    //    User 인증
     @Transactional
     public ResponseDto<?> validateCheck(HttpServletRequest request) {
-        if(null == request.getHeader("RefreshToken") || null == request.getHeader("Authorization")) {
+        if(null == request.getHeader("refreshtoken") || null == request.getHeader("Authorization")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
         }
         User user = validateUser(request);
@@ -198,13 +198,12 @@ public class CartService implements CartServiceImpl{
 
     @Transactional
     public User validateUser(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
+        if (!tokenProvider.validateToken(request.getHeader("refreshtoken"))) {
             return null;
         }
         return tokenProvider.getUserFromAuthentication();
     }
 }
-
 
 
 
