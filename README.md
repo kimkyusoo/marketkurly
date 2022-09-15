@@ -36,9 +36,9 @@
 
 
 # API 명세서
-![API 명세서 1](https://user-images.githubusercontent.com/110078419/190299842-a5472828-6d4f-4903-aafc-215bb095c92e.PNG)
-![API 명세서 2](https://user-images.githubusercontent.com/110078419/190299855-27624861-7a80-4f93-871c-eea2e71358a3.PNG)
-![API 명세서 3](https://user-images.githubusercontent.com/110078419/190299865-ca436881-c4b1-4729-8a20-307981bda723.PNG)
+![image](https://user-images.githubusercontent.com/110078419/190320256-c6db458a-9c4a-4848-a6dd-b7f18991b7b9.png)
+![image](https://user-images.githubusercontent.com/110078419/190320427-2a2c4059-63c9-4dba-b403-12c83414f898.png)
+![image](https://user-images.githubusercontent.com/110078419/190320642-a24a4f44-0342-4894-8e23-cc8d9730b40b.png)
 
 
 # ERD
