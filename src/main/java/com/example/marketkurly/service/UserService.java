@@ -67,8 +67,8 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User isPresentNickname(String nickname) {
-        Optional<User> optionalUser = userRepository.findByNickname(nickname);
-        return optionalUser.orElse(null);
+        Optional<User> optionalNickname = userRepository.findByNickname(nickname);
+        return optionalNickname.orElse(null);
     }
 
     @Transactional
