@@ -1,11 +1,10 @@
-INSERT INTO PRODUCT (TITLE, IMAGE_URL,PRICE, PRODUCT_DETAIL) values ('제품1', 'http:dummy1.com', 1000, '디테일1입니다');
-INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('제품2', 'http:dummy1.com', 2000, '디테일2입니다');
-INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('제품3', 'http:dummy1.com', 3000, '디테일3입니다');
-
--- INSERT
--- INTO USER
--- (NICKNAME, PASSWORD, USERNAME)
--- VALUES
--- ('닉네임1', '1234', '유저네임1')
---      , ('닉네임2', '1234', '유저네임2')
---      , ('닉네임3', '1234', '유저네임3')
+INSERT INTO PRODUCT (TITLE, IMAGE_URL,PRICE, PRODUCT_DETAIL) values ('[정호영의 우동카멘]키츠네 유부우동', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/woodong.PNG',5015, '[정호영의 우동카멘]키츠네 유부우동');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('[저스트그린]멕시칸 치킨 샐러드', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/salad.PNG', 5865, '[저스트그린]멕시칸 치킨 샐러드');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('냉동 블루베리 1kg(칠레산)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/blueberry.PNG', 8640, '냉동 블루베리 1kg(칠레산)');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL,PRICE, PRODUCT_DETAIL) values ('[폴 바셋] 바리스타 락토프리 카페라떼', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/ractofree.PNG', 2550, '[폴 바셋] 바리스타 락토프리 카페라떼');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('[에끌라두] 골든 샌달 우드 괄사 (페이스&두피 마사지 툴)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/wood.PNG', 9900, '[에끌라두] 골든 샌달 우드 괄사 (페이스&두피 마사지 툴)');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('냉동 블루베리 1kg(칠레산)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/blueberry.PNG', 4845, '[집국백서:가마솥 수제국] 추어탕');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('[저스트그린] 루꼴라 잠봉 샐러드', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/salad2.PNG', 5865, '[저스트그린] 루꼴라 잠봉 샐러드');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL, PRICE, PRODUCT_DETAIL) values ('[홍대주꾸미] 주꾸미 볶음 300g (냉동)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/octopus.PNG', 5700, '[홍대주꾸미] 주꾸미 볶음 300g (냉동)');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL,PRICE, PRODUCT_DETAIL) values ('[우주] 프리미엄 손질 생새우살 200g (냉동) (26/30사이즈)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/shrimp.PNG',6500, '[우주] 프리미엄 손질 생새우살 200g (냉동) (26/30사이즈)');
+INSERT INTO PRODUCT (TITLE, IMAGE_URL,PRICE, PRODUCT_DETAIL) values ('[샐러드판다] 병 샐러드 12종 (리뉴얼)', 'https://devcat-bucket.s3.ap-northeast-2.amazonaws.com/saladpanda.PNG',5865, '[샐러드판다] 병 샐러드 12종 (리뉴얼)');
